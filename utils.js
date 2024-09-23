@@ -57,6 +57,7 @@ async function getZkSyncProvider (zksync, networkName) {
       ethers.utils.parseEther(amountToTransfer))
     const closestPackableFee = zksync.utils.closestPackableTransactionFee(
       ethers.utils.parseEther(transferFee))
+  
     const transfer = await from.syncTransfer({
       to: toAddress,
       token: token,
@@ -68,3 +69,7 @@ async function getZkSyncProvider (zksync, networkName) {
     console.log(transferReceipt)
   }
   
+  async function getFee(transactionType, address, token, zkSyncProvider, ethers) {
+    const feeInWei = await zkSyncProvider.getTransactionFee(transactionType, address, token)
+    return ethers.utils.formatEther(feeInWei.totalFee.toString())
+  }
