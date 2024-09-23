@@ -1,0 +1,24 @@
+{
+  "name": "ether-zksync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winterbreaker22/Ether-zkSync.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/winterbreaker22/Ether-zkSync/issues"
+  },
+  "homepage": "https://github.com/winterbreaker22/Ether-zkSync#readme",
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "zksync": "^0.13.1"
+  }
+}
