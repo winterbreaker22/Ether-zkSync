@@ -67,16 +67,15 @@ async function getZkSyncProvider (zksync, networkName) {
     console.log(transferReceipt)
   }
   
-  async function getFee(transactionType, address, token, zkSyncProvider, ethers) {
-    const feeInWei = await zkSyncProvider.getTransactionFee(transactionType, address, token)
-    return ethers.utils.formatEther(feeInWei.totalFee.toString())
+  // 1. On the next line, replace the last parameter (`ethers`) with `tokenSet`
+  async function getFee(transactionType, address, token, zkSyncProvider, tokenSet) {
+    const fee = await zkSyncProvider.getTransactionFee(transactionType, address, token)
+  
+    // 2. On the next line, use the `tokenSet` object instead of `ethers.utils.formatEther`
+    return tokenSet.formatToken(token, fee.totalFee)
   }
   
-  // 1. On the next line, replace the last parameter (`ethers`) with `tokenSet`
   async function withdrawToEthereum (wallet, amountToWithdraw, withdrawalFee, token, zksync, tokenSet) {
-  
-    // 2. Update the following two lines of code
-  
     const closestPackableAmount = zksync.utils.closestPackableTransactionAmount(tokenSet.parseToken(token, amountToWithdraw))
     const closestPackableFee = zksync.utils.closestPackableTransactionFee(tokenSet.parseToken(token, withdrawalFee))
     const withdraw = await wallet.withdrawFromSyncToEthereum({
